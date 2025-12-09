@@ -1,0 +1,1672 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الدليل التشغيلي المرجعي الشامل | منصة يُسر</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'yosr-blue': '#1e3a8a',
+                        'yosr-gold': '#d97706',
+                        'yosr-dark': '#0f172a',
+                        'yosr-bg': '#f8fafc',
+                    },
+                    fontFamily: {
+                        sans: ['IBM Plex Sans Arabic', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #1e3a8a; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #d97706; }
+
+        .sidebar { transition: transform 0.3s ease-in-out; }
+        .nav-link.active { 
+            background: linear-gradient(90deg, rgba(217,119,6,0.1) 0%, transparent 100%);
+            color: #d97706; 
+            border-right: 4px solid #d97706; 
+        }
+        
+        @media print {
+            .no-print, aside, #mobile-header { display: none !important; }
+            main { margin: 0 !important; padding: 0 !important; width: 100%; }
+            body { font-size: 10pt; background-color: white; }
+            .page-break { page-break-before: always; }
+        }
+
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #e5e7eb; padding: 0.75rem; text-align: right; vertical-align: top; }
+        th { background-color: #f3f4f6; font-weight: 700; color: #1e3a8a; }
+
+        .checklist-item { display: flex; align-items: start; gap: 0.5rem; margin-bottom: 0.5rem; }
+        .checklist-item input[type="checkbox"] { margin-top: 0.25rem; accent-color: #d97706; }
+
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(30, 58, 138, 0.1); }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #1e3a8a 0%, #d97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .critical-box {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border: 2px solid #ef4444;
+        }
+
+        .legal-box {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 2px solid #22c55e;
+        }
+    </style>
+</head>
+<body class="bg-yosr-bg font-sans text-gray-800 antialiased">
+
+    <!-- Mobile Header -->
+    <div id="mobile-header" class="lg:hidden bg-yosr-dark text-white p-4 flex justify-between items-center sticky top-0 z-50 shadow-lg">
+        <div class="flex items-center gap-3">
+            <i class="fa-solid fa-hand-holding-heart text-yosr-gold text-xl"></i>
+            <span class="font-bold text-lg">دليل تشغيل يُسر</span>
+        </div>
+        <button onclick="toggleSidebar()" class="text-yosr-gold focus:outline-none">
+            <i class="fa-solid fa-bars text-2xl"></i>
+        </button>
+    </div>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar fixed top-0 right-0 h-screen w-80 bg-yosr-dark text-white shadow-2xl z-50 transform translate-x-full lg:translate-x-0 overflow-y-auto print:hidden">
+        <div class="p-6 border-b border-white/10 flex flex-col items-center relative bg-gradient-to-b from-yosr-blue to-yosr-dark">
+            <button onclick="toggleSidebar()" class="lg:hidden absolute top-4 left-4 text-gray-400 hover:text-white transition">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <div class="w-16 h-16 bg-gradient-to-br from-yosr-gold to-amber-500 rounded-2xl flex items-center justify-center text-yosr-dark text-2xl mb-4 shadow-lg transform rotate-3">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+            </div>
+            <h1 class="text-xl font-bold">منصة يُسر</h1>
+            <p class="text-xs text-gray-400 mt-1">الدليل التشغيلي المرجعي الشامل</p>
+            <div class="flex gap-2 mt-3">
+                <span class="bg-yosr-gold/20 text-yosr-gold text-xs px-2 py-1 rounded-full">v7.0</span>
+                <span class="bg-red-500/20 text-red-400 text-xs px-2 py-1 rounded-full">داخلي ملزم</span>
+            </div>
+        </div>
+        
+        <nav class="p-3 text-sm space-y-0.5">
+            <p class="text-xs text-gray-400 uppercase tracking-wider px-3 py-2 mt-2">لمحة احترافية</p>
+            <a href="#overview" onclick="closeSidebarOnMobile()" class="nav-link block px-3 py-2 rounded hover:bg-white/5 transition">0. لمحة تنفيذية</a>
+            <p class="text-xs text-gray-500 uppercase tracking-wider px-3 py-2 mt-2">الهوية والتأسيس</p>
+            <a href="#sec-1" onclick="closeSidebarOnMobile()" class="nav-link block px-3 py-2 rounded hover:bg-white/5 transition">1. من نحن</a>
+            <a href="#sec-2" onclick="closeSidebarOnMobile()" class="nav-link block px-3 py-2 rounded hover:bg-white/5 transition">2. لماذا نحن</a>
+            <a href="#sec-3" onclick="closeSidebarOnMobile()" class="nav-link block px-3 py-2 rounded hover:bg-white/5 transition">3. كيف نعمل</a>
+            
+            <p class="text-xs text-gray-500 uppercase tracking-wider px-3 py-2 mt-4">الحوكمة والهيكلة</p>
+            <a href="#sec-4" onclick="closeSidebarOnMobile()" class="nav-link block px-3 py-2 rounded hover:bg-white/5 transition">4. الميثاق الأخلاقي والشرعي</a>
+            <a href="#sec-5" onclick="closeSidebarOnMobile()" class="nav-link block px-3 py-2 rounded hover:bg-white/5 transition">5. الإطار القانوني والذمة المالية</a>
+            <a href="#sec-6" onclick="closeSidebarOnMobile()" class="nav-link block px-3 py-2 rounded hover:bg-white/5 transition">6. الهيكل الإداري</a>
+            <a href="#sec-7" onclick="closeSidebarOnMobile()" class="nav-link block px-3 py-2 rounded hover:bg-white/5 transition">7. المجلس الإداري</a>
+            
+            <p class="text-xs text-gray-500 uppercase tracking-wider px-3 py-2 mt-4">العمليات</p>
+            <a href="#sec-8" onclick="closeSidebarOnMobile()" class="nav-link block px-3 py-2 rounded hover:bg-white/5 transition">8. نطاق العمل وأنواع الحالات</a>
+            <a href="#sec-9" onclick="closeSidebarOnMobile()" class="nav-link block px-3 py-2 rounded hover:bg-white/5 transition">9. دورة حياة الحالة (SOPs)</a>
+            <a href="#sec-10" onclick="closeSidebarOnMobile()" class="nav-link block px-3 py-2 rounded hover:bg-white/5 transition">10. سياسات القبول والرفض</a>
+            <a href="#sec-11" onclick="closeSidebarOnMobile()" class="nav-link block px-3 py-2 rounded hover:bg-white/5 transition">11. التحقق وكشف التلاعب</a>
+            <a href="#sec-12" onclick="closeSidebarOnMobile()" class="nav-link block px-3 py-2 rounded hover:bg-white/5 transition">12. استراتيجية الخروج للمستفيدين</a>
+            
+            <p class="text-xs text-gray-500 uppercase tracking-wider px-3 py-2 mt-4">الشؤون المالية</p>
+            <a href="#sec-13" onclick="closeSidebarOnMobile()" class="nav-link block px-3 py-2 rounded hover:bg-white/5 transition">13. النظام المالي والرقابة</a>
+            <a href="#sec-14" onclick="closeSidebarOnMobile()" class="nav-link block px-3 py-2 rounded hover:bg-white/5 transition">14. التسعير والتكاليف</a>
+            <a href="#sec-15" onclick="closeSidebarOnMobile()" class="nav-link block px-3 py-2 rounded hover:bg-white/5 transition">15. سيناريوهات الدفع والاسترداد</a>
+            <a href="#sec-16" onclick="closeSidebarOnMobile()" class="nav-link block px-3 py-2 rounded hover:bg-white/5 transition">16. الوقف والاستدامة المالية</a>
+            
+            <p class="text-xs text-gray-500 uppercase tracking-wider px-3 py-2 mt-4">الشراكات والموارد</p>
+            <a href="#sec-17" onclick="closeSidebarOnMobile()" class="nav-link block px-3 py-2 rounded hover:bg-white/5 transition">17. الاعتمادات والمستشفيات</a>
+            <a href="#sec-18" onclick="closeSidebarOnMobile()" class="nav-link block px-3 py-2 rounded hover:bg-white/5 transition">18. المؤسسات المتعاونة والشركاء</a>
+            <a href="#sec-19" onclick="closeSidebarOnMobile()" class="nav-link block px-3 py-2 rounded hover:bg-white/5 transition">19. المتطوعون</a>            
+            <p class="text-xs text-gray-500 uppercase tracking-wider px-3 py-2 mt-4">السياسات والأمن</p>
+            <a href="#sec-21" onclick="closeSidebarOnMobile()" class="nav-link block px-3 py-2 rounded hover:bg-white/5 transition">21. إدارة المخاطر والأزمات</a>
+            <a href="#sec-22" onclick="closeSidebarOnMobile()" class="nav-link block px-3 py-2 rounded hover:bg-white/5 transition">22. الأمن والبيانات</a>
+            <a href="#sec-23" onclick="closeSidebarOnMobile()" class="nav-link block px-3 py-2 rounded hover:bg-white/5 transition">23. الاتصال والإعلام</a>
+            <a href="#sec-24" onclick="closeSidebarOnMobile()" class="nav-link block px-3 py-2 rounded hover:bg-white/5 transition">24. الملحقات والنماذج</a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="lg:mr-80 min-h-screen p-6 lg:p-12 print:p-0">
+        <div class="max-w-5xl mx-auto">
+            
+            <!-- Cover Section -->
+            <div class="text-center py-12 mb-12 relative">
+                <div class="absolute inset-0 bg-gradient-to-br from-yosr-blue/5 via-transparent to-yosr-gold/5 rounded-3xl"></div>
+                <div class="relative">
+                    <div class="w-24 h-24 bg-gradient-to-br from-yosr-blue to-yosr-gold rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl transform rotate-3">
+                        <i class="fa-solid fa-book-atlas text-4xl text-white"></i>
+                    </div>
+                    <h1 class="text-4xl lg:text-5xl font-extrabold gradient-text mb-4">الدليل التشغيلي المرجعي الشامل</h1>
+                    <h2 class="text-2xl text-yosr-gold font-bold mb-6">منصة يُسر للتكافل الرقمي</h2>
+                    <div class="flex flex-wrap justify-center gap-3 text-sm">
+                        <span class="bg-yosr-blue/10 text-yosr-blue px-4 py-2 rounded-full border border-yosr-blue/20 font-semibold">
+                            <i class="fa-solid fa-code-branch ml-1"></i> الإصدار 7.0 - الطبعة المؤسسية
+                        </span>
+                        <span class="bg-red-50 text-red-700 px-4 py-2 rounded-full border border-red-200 font-semibold">
+                            <i class="fa-solid fa-lock ml-1"></i> وثيقة داخلية ملزمة
+                        </span>
+                        <span class="bg-gray-100 text-gray-700 px-4 py-2 rounded-full border border-gray-200 font-semibold">
+                            <i class="fa-solid fa-calendar-check ml-1"></i> 2025
+                        </span>
+                    </div>
+                    <p class="mt-6 text-gray-500 text-sm max-w-2xl mx-auto">
+                        هذا الدليل يمثل الدستور التشغيلي الكامل للمنصة، ويشمل جميع السياسات القانونية، المالية، التشغيلية، والتقنية اللازمة لضمان استدامة العمل لعقود قادمة.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mb-8 space-y-2">
+                <div class="h-1 rounded-full bg-gray-200 overflow-hidden shadow-sm">
+                    <div id="reading-progress" class="h-full w-0 bg-gradient-to-r from-yosr-blue to-yosr-gold transition-all duration-200"></div>
+                </div>
+                <p class="text-xs text-center text-gray-500">مؤشر يوضح مدى التقدم في قراءة هذا الدليل المهيكل.</p>
+            </div>
+
+            <section id="overview" class="mb-16 scroll-mt-24 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-gradient-to-l from-yosr-blue to-yosr-dark p-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <span class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center text-lg ml-3">0</span>
+                        لمحة احترافية
+                    </h2>
+                </div>
+                <div class="p-8 space-y-8">
+                    <div class="grid lg:grid-cols-[1fr,0.9fr] gap-8">
+                        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm relative overflow-hidden">
+                            <div class="text-xs text-gray-400 uppercase tracking-widest mb-4">ملخص تنفيذي</div>
+                            <h3 class="text-2xl font-semibold text-yosr-blue mb-3">نظرة واحدة على التميز التشغيلي</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                الدليل يُترجم استراتيجية يُسر إلى خارطة إجراءات يومية تخدم الإدارة والميداني، وتجمع بين الحوكمة الرقمية والتجربة الإنسانية المتسقة.
+                            </p>
+                            <ul class="space-y-4 text-sm text-gray-600">
+                                <li class="flex gap-3">
+                                    <span class="inline-flex shrink-0 items-center justify-center w-8 h-8 rounded-full bg-yosr-blue/10 text-yosr-blue font-semibold text-sm">01</span>
+                                    <div>
+                                        <strong class="text-yosr-blue">حوكمة مضبوطة</strong>
+                                        <p class="text-xs text-gray-500">كل سياسة ترتبط بمسارات إصدار واضحة، توثيق إلكتروني، ومراجعة سنوية.</p>
+                                    </div>
+                                </li>
+                                <li class="flex gap-3">
+                                    <span class="inline-flex shrink-0 items-center justify-center w-8 h-8 rounded-full bg-yosr-gold/10 text-yosr-gold font-semibold text-sm">02</span>
+                                    <div>
+                                        <strong class="text-yosr-gold">تجربة متسقة</strong>
+                                        <p class="text-xs text-gray-500">منصة العمليات توحّد التفاعل مع المتطوعين، المستفيدين، والشركاء عبر سير عمل موثق.</p>
+                                    </div>
+                                </li>
+                                <li class="flex gap-3">
+                                    <span class="inline-flex shrink-0 items-center justify-center w-8 h-8 rounded-full bg-green-100 text-green-600 font-semibold text-sm">03</span>
+                                    <div>
+                                        <strong class="text-green-700">أثر مستدام</strong>
+                                        <p class="text-xs text-gray-500">تقارير الأداء ترصد الأثر، وتغذية اللجنة المالية والتقنية بكل معطى دقيق.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="flex flex-wrap gap-2 mt-6 text-[10px] uppercase tracking-widest">
+                                <span class="px-3 py-1 rounded-full bg-yosr-gold/20 text-yosr-gold">الشفافية</span>
+                                <span class="px-3 py-1 rounded-full bg-yosr-blue/20 text-yosr-blue">السرعة</span>
+                                <span class="px-3 py-1 rounded-full bg-green-100 text-green-700">الحياد</span>
+                                <span class="px-3 py-1 rounded-full bg-amber-100 text-amber-700">الكفاءة</span>
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="bg-gradient-to-br from-yosr-blue to-yosr-gold p-6 rounded-2xl text-white relative overflow-hidden shadow-xl">
+                                <div class="flex items-center justify-between mb-5">
+                                    <h3 class="text-lg font-semibold">مؤشرات الاحترافية</h3>
+                                    <span class="text-[10px] uppercase tracking-wider bg-white/20 px-2 py-0.5 rounded-full">قابلة للقياس</span>
+                                </div>
+                                <div class="grid grid-cols-3 gap-4 text-center text-xs uppercase tracking-wider">
+                                    <div>
+                                        <p class="text-3xl font-bold leading-none">24</p>
+                                        <p class="text-white/80 mt-1">فصلاً مهيكلاً</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-3xl font-bold leading-none">7.0</p>
+                                        <p class="text-white/80 mt-1">نسخة مؤسسية</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-3xl font-bold leading-none">4</p>
+                                        <p class="text-white/80 mt-1">محاور استراتيجية</p>
+                                    </div>
+                                </div>
+                                <div class="mt-4 flex flex-wrap gap-2 text-[10px] uppercase tracking-widest">
+                                    <span class="px-3 py-1 rounded-full bg-white/20">حوكمة</span>
+                                    <span class="px-3 py-1 rounded-full bg-white/20">عمليات</span>
+                                    <span class="px-3 py-1 rounded-full bg-white/20">أمن البيانات</span>
+                                    <span class="px-3 py-1 rounded-full bg-white/20">تواصل</span>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 p-5 rounded-2xl border border-dashed border-gray-200 shadow-sm">
+                                <h4 class="text-sm font-semibold text-yosr-blue mb-3">خارطة العمل السريع</h4>
+                                <ol class="space-y-3 text-gray-600 text-sm">
+                                    <li class="flex items-start gap-3">
+                                        <div class="w-8 h-8 flex items-center justify-center text-xs font-bold text-yosr-blue bg-white border border-yosr-blue rounded-full mt-1">1</div>
+                                        <div>
+                                            <strong>تدشين قراءة موجهة</strong>
+                                            <p class="text-xs text-gray-500">ابدأ برؤية المنصة ثم عُد إلى الأطر الشرعية والحوكمة.</p>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <div class="w-8 h-8 flex items-center justify-center text-xs font-bold text-yosr-blue bg-white border border-yosr-blue rounded-full mt-1">2</div>
+                                        <div>
+                                            <strong>ضبط الأدوار والروابط</strong>
+                                            <p class="text-xs text-gray-500">حدّد من يدير كل عملية (مالي، تقني، فني/مجتمعي).</p>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <div class="w-8 h-8 flex items-center justify-center text-xs font-bold text-yosr-blue bg-white border border-yosr-blue rounded-full mt-1">3</div>
+                                        <div>
+                                            <strong>مراجعة ريادية</strong>
+                                            <p class="text-xs text-gray-500">راجع التحديثات الاستراتيجية كل ثلاثة أشهر ودوّن الملاحظات.</p>
+                                        </div>
+                                    </li>
+                                </ol>
+                                <a href="#sec-1" class="mt-5 inline-flex items-center justify-center w-full rounded-full bg-yosr-blue text-white py-2 text-sm font-semibold hover:bg-yosr-dark transition">
+                                    ابدأ من هنا
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== SECTION 1: من نحن ===================== -->
+            <section id="sec-1" class="mb-16 scroll-mt-24 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-gradient-to-l from-yosr-blue to-yosr-dark p-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <span class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center text-lg ml-3">1</span>
+                        من نحن
+                    </h2>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-xl font-bold text-yosr-blue mb-4"><i class="fa-solid fa-fingerprint ml-2 text-yosr-gold"></i> 1.1 التعريف</h3>
+                    <div class="bg-gradient-to-l from-yosr-blue/5 to-transparent p-6 rounded-xl border-r-4 border-yosr-blue mb-6">
+                        <p class="text-lg font-semibold leading-relaxed">
+                            <strong class="text-yosr-blue">يُسر</strong> هي منصة سودانية تكافلية رقمية، تعمل كوسيط تقني موثوق لسد الفجوة بين المانح والمحتاج، متجاوزة التحديات اللوجستية والمصرفية، لضمان وصول الدعم لمستحقيه بكرامة وشفافية.
+                        </p>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-yosr-blue mb-4"><i class="fa-solid fa-eye ml-2 text-yosr-gold"></i> 1.2 الرؤية والرسالة</h3>
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-blue-50 p-6 rounded-xl border-r-4 border-yosr-blue card-hover">
+                            <div class="flex items-center gap-3 mb-3">
+                                <i class="fa-regular fa-eye text-2xl text-yosr-blue"></i>
+                                <strong class="text-lg text-yosr-blue">الرؤية</strong>
+                            </div>
+                            <p class="text-gray-700">أن نكون المعيار الذهبي للعمل الخيري الرقمي في السودان، حيث لا يحول بين المحتاج وحقه في الحياة عقبة مالية أو جغرافية.</p>
+                        </div>
+                        <div class="bg-amber-50 p-6 rounded-xl border-r-4 border-yosr-gold card-hover">
+                            <div class="flex items-center gap-3 mb-3">
+                                <i class="fa-solid fa-bullseye text-2xl text-yosr-gold"></i>
+                                <strong class="text-lg text-yosr-gold">الرسالة</strong>
+                            </div>
+                            <p class="text-gray-700">حوكمة الخير عبر تقنية تضمن: الشفافية (كل جنيه له مستند)، السرعة (استجابة للطوارئ)، والكرامة (الستر للمستفيد).</p>
+                        </div>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-yosr-blue mb-4"><i class="fa-solid fa-dna ml-2 text-yosr-gold"></i> 1.3 القيم الجوهرية</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+                            <div class="w-12 h-12 bg-yosr-blue/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-glass-water text-yosr-blue text-xl"></i>
+                            </div>
+                            <div>
+                                <strong class="text-yosr-blue">الشفافية المطلقة</strong>
+                                <p class="text-sm text-gray-600 mt-1">لا صناديق سوداء؛ كل عملية مالية قابلة للتدقيق.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+                            <div class="w-12 h-12 bg-yosr-gold/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-crown text-yosr-gold text-xl"></i>
+                            </div>
+                            <div>
+                                <strong class="text-yosr-gold">الكرامة أولاً</strong>
+                                <p class="text-sm text-gray-600 mt-1">يدُ المانح مخفية، ووجه المستفيد مصان.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+                            <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-scale-balanced text-green-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <strong class="text-green-700">الحيادية الصارمة</strong>
+                                <p class="text-sm text-gray-600 mt-1">لا سياسة، لا قبيلة، لا مناطقية. المعيار هو "الحاجة".</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+                            <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-bolt text-purple-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <strong class="text-purple-700">الكفاءة</strong>
+                                <p class="text-sm text-gray-600 mt-1">صفر هدر إداري من أموال التبرعات المباشرة.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== SECTION 2: لماذا نحن ===================== -->
+            <section id="sec-2" class="mb-16 scroll-mt-24 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-gradient-to-l from-yosr-blue to-yosr-dark p-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <span class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center text-lg ml-3">2</span>
+                        لماذا نحن
+                    </h2>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-xl font-bold text-yosr-blue mb-6">ما يميزنا عن غيرنا</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-gradient-to-br from-yosr-blue/5 to-yosr-gold/5 p-6 rounded-xl border border-gray-100 card-hover">
+                            <div class="w-14 h-14 bg-yosr-blue rounded-2xl flex items-center justify-center mb-4">
+                                <i class="fa-solid fa-ban text-white text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-yosr-blue text-lg mb-2">غياب الوسيط</h4>
+                            <p class="text-gray-600">التبرع يذهب للخدمة مباشرة (مستشفى/جامعة) وليس لجيوب الأفراد.</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-yosr-blue/5 to-yosr-gold/5 p-6 rounded-xl border border-gray-100 card-hover">
+                            <div class="w-14 h-14 bg-yosr-gold rounded-2xl flex items-center justify-center mb-4">
+                                <i class="fa-solid fa-magnifying-glass-dollar text-white text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-yosr-gold text-lg mb-2">التدقيق الجنائي</h4>
+                            <p class="text-gray-600">نحن لا نعتمد على العاطفة، بل على المستندات التي تخضع للفحص.</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-yosr-blue/5 to-yosr-gold/5 p-6 rounded-xl border border-gray-100 card-hover">
+                            <div class="w-14 h-14 bg-green-600 rounded-2xl flex items-center justify-center mb-4">
+                                <i class="fa-solid fa-vault text-white text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-green-700 text-lg mb-2">التدفق المالي المغلق</h4>
+                            <p class="text-gray-600">المال لا يلمس يد المستفيد، مما يغلق باب سوء الاستخدام.</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-yosr-blue/5 to-yosr-gold/5 p-6 rounded-xl border border-gray-100 card-hover">
+                            <div class="w-14 h-14 bg-purple-600 rounded-2xl flex items-center justify-center mb-4">
+                                <i class="fa-solid fa-file-invoice text-white text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-purple-700 text-lg mb-2">الشفافية الكاملة</h4>
+                            <p class="text-gray-600">كل حالة موثقة، كل دفعة لها إيصال، كل متبرع يتتبع أمواله.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== SECTION 3: كيف نعمل ===================== -->
+            <section id="sec-3" class="mb-16 scroll-mt-24 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-gradient-to-l from-yosr-blue to-yosr-dark p-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <span class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center text-lg ml-3">3</span>
+                        كيف نعمل
+                    </h2>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-xl font-bold text-yosr-blue mb-6">رحلة الحالة من البداية للنهاية</h3>
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 bg-yosr-blue rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">1</div>
+                            <div class="bg-gray-50 p-4 rounded-xl flex-1">
+                                <h4 class="font-bold text-yosr-blue">تسجيل الحالة</h4>
+                                <p class="text-gray-600 text-sm">يقوم المستفيد بتعبئة الاستمارة الإلكترونية ورفع المستندات المطلوبة.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 bg-yosr-blue rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">2</div>
+                            <div class="bg-gray-50 p-4 rounded-xl flex-1">
+                                <h4 class="font-bold text-yosr-blue">التحقق والتدقيق</h4>
+                                <p class="text-gray-600 text-sm">فريق التحقق يراجع المستندات ويتصل بالجهات الرسمية.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 bg-yosr-blue rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">3</div>
+                            <div class="bg-gray-50 p-4 rounded-xl flex-1">
+                                <h4 class="font-bold text-yosr-blue">التواصل مع المؤسسة</h4>
+                                <p class="text-gray-600 text-sm">التنسيق مع المستشفى/الجامعة للحصول على فاتورة رسمية.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 bg-yosr-blue rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">4</div>
+                            <div class="bg-gray-50 p-4 rounded-xl flex-1">
+                                <h4 class="font-bold text-yosr-blue">نشر الحالة</h4>
+                                <p class="text-gray-600 text-sm">صياغة القصة بطريقة تحفظ كرامة المستفيد ونشرها على المنصة.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 bg-yosr-blue rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">5</div>
+                            <div class="bg-gray-50 p-4 rounded-xl flex-1">
+                                <h4 class="font-bold text-yosr-blue">جمع التبرعات</h4>
+                                <p class="text-gray-600 text-sm">المتبرعون يساهمون عبر بنكك ويرفعون إشعارات التحويل.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 bg-yosr-gold rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">6</div>
+                            <div class="bg-amber-50 p-4 rounded-xl flex-1 border border-yosr-gold/30">
+                                <h4 class="font-bold text-yosr-gold">إغلاق الحالة والصرف</h4>
+                                <p class="text-gray-600 text-sm">التحويل مباشرة للمؤسسة ورفع إيصال الدفع والأرشفة.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== SECTION 4: الميثاق الأخلاقي ===================== -->
+            <section id="sec-4" class="mb-16 scroll-mt-24 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-gradient-to-l from-yosr-blue to-yosr-dark p-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <span class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center text-lg ml-3">4</span>
+                        الميثاق الأخلاقي والشرعي
+                    </h2>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-xl font-bold text-yosr-blue mb-4"><i class="fa-solid fa-mosque ml-2 text-yosr-gold"></i> 4.1 الضوابط الشرعية</h3>
+                    <div class="space-y-4 mb-8">
+                        <div class="bg-green-50 p-5 rounded-xl border border-green-100">
+                            <h4 class="font-bold text-green-800 mb-2">قاعدة "شرط الواقف كنص الشارع"</h4>
+                            <p class="text-gray-700">التبرع المخصص لحالة معينة لا يجوز صرفه في غيرها إلا بإذن المتبرع أو فتوى شرعية.</p>
+                        </div>
+                        <div class="bg-green-50 p-5 rounded-xl border border-green-100">
+                            <h4 class="font-bold text-green-800 mb-2">مصارف الزكاة</h4>
+                            <p class="text-gray-700">الحالات التي تندرج تحت بند الزكاة يجب تمييزها بوضوح ولا تُصرف في المشاريع العامة.</p>
+                        </div>
+                        <div class="bg-green-50 p-5 rounded-xl border border-green-100">
+                            <h4 class="font-bold text-green-800 mb-2">تحريم التربح</h4>
+                            <p class="text-gray-700">يحرم تحصيل أي نسبة أو عمولة من أموال التبرعات لصالح المنصة أو العاملين.</p>
+                        </div>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-yosr-blue mb-4"><i class="fa-solid fa-file-contract ml-2 text-yosr-gold"></i> 4.2 مدونة السلوك</h3>
+                    <div class="bg-red-50 p-6 rounded-xl border border-red-100 mb-8">
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-triangle-exclamation text-red-600 mt-1"></i>
+                                <div>
+                                    <strong class="text-red-800">تضارب المصالح</strong>
+                                    <p class="text-gray-700 text-sm mt-1">يمنع على أي عضو رفع حالة تخصه أو أقاربه دون الإفصاح المسبق.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-triangle-exclamation text-red-600 mt-1"></i>
+                                <div>
+                                    <strong class="text-red-800">سرية البيانات</strong>
+                                    <p class="text-gray-700 text-sm mt-1">بيانات المستفيدين أمانة، وتسريبها خيانة تستوجب الفصل والملاحقة.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- التعامل مع أقارب الموظفين -->
+                    <h3 class="text-xl font-bold text-yosr-blue mb-4"><i class="fa-solid fa-users ml-2 text-yosr-gold"></i> 4.3 سياسة التعامل مع أقارب الموظفين (الدرجة الأولى)</h3>
+                    <div class="bg-amber-50 p-6 rounded-xl border border-amber-200 mb-8">
+                        <div class="mb-4">
+                            <h4 class="font-bold text-amber-800 mb-2">المبدأ العام</h4>
+                            <p class="text-gray-700">لا يُحرم أقارب العاملين من الدعم لمجرد صلة القرابة، فذلك ظلم. لكن يُشترط الحياد التام.</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border border-amber-100">
+                            <h5 class="font-bold text-amber-700 mb-3">الضوابط الملزمة:</h5>
+                            <ul class="space-y-2 text-gray-700 text-sm">
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-600 mt-1"></i><span><strong>الإفصاح الكامل:</strong> يجب على الموظف الإفصاح كتابياً عن صلة القرابة فور تقديم الطلب.</span></li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-600 mt-1"></i><span><strong>المسار العادي:</strong> لا يحق لأقارب الموظفين الدخول عبر مسار Fast Track.</span></li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-600 mt-1"></i><span><strong>لجنة خارجية:</strong> يتم التدقيق من قبل جهة شريكة مستقلة أو لجنة من مجلس الأمناء.</span></li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-600 mt-1"></i><span><strong>العزل الإداري:</strong> يُعزل الموظف القريب تماماً عن جميع مراحل الحالة.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- التدقيق الخارجي -->
+                    <h3 class="text-xl font-bold text-yosr-blue mb-4"><i class="fa-solid fa-clipboard-check ml-2 text-yosr-gold"></i> 4.4 التدقيق الخارجي السنوي</h3>
+                    <div class="legal-box p-6 rounded-xl">
+                        <div class="flex items-start gap-4">
+                            <div class="w-14 h-14 bg-green-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-user-tie text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-green-800 mb-2">الالتزام بالمراجعة القانونية</h4>
+                                <p class="text-gray-700 mb-4">تلتزم المنصة بتعيين <strong>مكتب مراجع قانوني خارجي معتمد</strong> لمراجعة القوائم المالية سنوياً.</p>
+                                <div class="bg-white p-4 rounded-lg border border-green-200">
+                                    <ul class="space-y-2 text-sm text-gray-700">
+                                        <li class="flex items-center gap-2"><i class="fa-solid fa-calendar text-green-600"></i><span>موعد المراجعة: خلال الربع الأول من كل سنة</span></li>
+                                        <li class="flex items-center gap-2"><i class="fa-solid fa-file-pdf text-green-600"></i><span>التقرير: يُنشر للجمهور عبر الموقع الرسمي</span></li>
+                                        <li class="flex items-center gap-2"><i class="fa-solid fa-shield text-green-600"></i><span>الهدف: كسب ثقة المانحين الكبار (شركات/بنوك/منظمات)</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== SECTION 5: الإطار القانوني ===================== -->
+            <section id="sec-5" class="mb-16 scroll-mt-24 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-gradient-to-l from-yosr-blue to-yosr-dark p-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <span class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center text-lg ml-3">5</span>
+                        الإطار القانوني والذمة المالية
+                    </h2>
+                </div>
+                <div class="p-8">
+                    <!-- الكيان القانوني -->
+                    <h3 class="text-xl font-bold text-yosr-blue mb-4"><i class="fa-solid fa-building-columns ml-2 text-yosr-gold"></i> 5.1 الشخصية القانونية</h3>
+                    <div class="bg-blue-50 p-6 rounded-xl border border-blue-200 mb-8">
+                        <div class="overflow-x-auto">
+                            <table class="text-sm">
+                                <thead>
+                                    <tr>
+                                        <th class="w-1/3">البند</th>
+                                        <th>التفاصيل</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="font-semibold text-yosr-blue">نوع التسجيل</td>
+                                        <td>منظمة طوعية مسجلة لدى مفوضية العون الإنساني (HAC) / أو شركة غير ربحية (المادة 229 من قانون الشركات)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-semibold text-yosr-blue">الرقم الوطني للمنظمة</td>
+                                        <td><span class="bg-gray-200 px-2 py-1 rounded font-mono">[يُملأ عند التسجيل]</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-semibold text-yosr-blue">تاريخ التأسيس</td>
+                                        <td><span class="bg-gray-200 px-2 py-1 rounded font-mono">[يُملأ]</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-semibold text-yosr-blue">تجديد الرخصة</td>
+                                        <td>سنوياً - قبل <span class="bg-red-100 text-red-700 px-2 py-0.5 rounded">31 ديسمبر</span> من كل عام</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-semibold text-yosr-blue">العنوان القانوني</td>
+                                        <td><span class="bg-gray-200 px-2 py-1 rounded font-mono">الخرطوم - الرياض - شارع ١١٧ </span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- صلاحيات التوقيع -->
+                    <h3 class="text-xl font-bold text-yosr-blue mb-4"><i class="fa-solid fa-signature ml-2 text-yosr-gold"></i> 5.2 صلاحيات التوقيع المالي</h3>
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-green-50 p-6 rounded-xl border border-green-200">
+                            <h4 class="font-bold text-green-800 mb-3"><i class="fa-solid fa-user ml-2"></i> التوقيع المنفرد</h4>
+                            <p class="text-gray-700 mb-2">للمعاملات حتى:</p>
+                            <div class="bg-white p-3 rounded-lg text-center">
+                                <span class="text-2xl font-bold text-green-700">500,000</span>
+                                <span class="text-gray-600 text-sm block">جنيه سوداني</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-3">المخولون: المدير العام، المدير المالي</p>
+                        </div>
+                        <div class="bg-amber-50 p-6 rounded-xl border border-amber-200">
+                            <h4 class="font-bold text-amber-800 mb-3"><i class="fa-solid fa-users ml-2"></i> التوقيع المشترك</h4>
+                            <p class="text-gray-700 mb-2">للمعاملات أكثر من:</p>
+                            <div class="bg-white p-3 rounded-lg text-center">
+                                <span class="text-2xl font-bold text-amber-700">500,000</span>
+                                <span class="text-gray-600 text-sm block">جنيه سوداني</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-3">يتطلب: توقيعين من المفوضين الثلاثة</p>
+                        </div>
+                    </div>
+
+                    <!-- المفوضون بالتوقيع -->
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 mb-8">
+                        <h4 class="font-bold text-yosr-blue mb-4">المفوضون بالتوقيع على الحساب البنكي</h4>
+                        <div class="overflow-x-auto">
+                            <table class="text-sm">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>الاسم</th>
+                                        <th>المنصب</th>
+                                        <th>رقم الهوية</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center">1</td>
+                                        <td><span class="bg-gray-200 px-2 py-1 rounded">[يُملأ]</span></td>
+                                        <td>رئيس مجلس الأمناء</td>
+                                        <td><span class="bg-gray-200 px-2 py-1 rounded font-mono">[يُملأ]</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">2</td>
+                                        <td><span class="bg-gray-200 px-2 py-1 rounded">[يُملأ]</span></td>
+                                        <td>المدير العام</td>
+                                        <td><span class="bg-gray-200 px-2 py-1 rounded font-mono">[يُملأ]</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">3</td>
+                                        <td><span class="bg-gray-200 px-2 py-1 rounded">[يُملأ]</span></td>
+                                        <td>المدير المالي</td>
+                                        <td><span class="bg-gray-200 px-2 py-1 rounded font-mono">[يُملأ]</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- بروتوكول وفاة المفوض -->
+                    <div class="critical-box p-6 rounded-xl">
+                        <h4 class="font-bold text-red-800 mb-4"><i class="fa-solid fa-skull-crossbones ml-2"></i> بروتوكول وفاة/عجز المفوض بالتوقيع</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3 bg-white p-3 rounded-lg">
+                                <span class="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm flex-shrink-0">1</span>
+                                <span class="text-gray-700">إخطار البنك فوراً (خلال 24 ساعة) بتجميد التوقيع</span>
+                            </div>
+                            <div class="flex items-start gap-3 bg-white p-3 rounded-lg">
+                                <span class="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm flex-shrink-0">2</span>
+                                <span class="text-gray-700">اجتماع طارئ لمجلس الأمناء خلال 72 ساعة</span>
+                            </div>
+                            <div class="flex items-start gap-3 bg-white p-3 rounded-lg">
+                                <span class="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm flex-shrink-0">3</span>
+                                <span class="text-gray-700">تعيين مفوض بديل بقرار موثق ومختوم</span>
+                            </div>
+                            <div class="flex items-start gap-3 bg-white p-3 rounded-lg">
+                                <span class="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm flex-shrink-0">4</span>
+                                <span class="text-gray-700">تحديث نموذج التوقيعات لدى البنك</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 bg-yellow-50 p-3 rounded-lg border border-yellow-200">
+                            <p class="text-sm text-yellow-800"><i class="fa-solid fa-lightbulb ml-1"></i> <strong>توصية:</strong> يُحتفظ بخطاب تفويض مسبق (Standby Authorization) في خزنة المنظمة للطوارئ.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== SECTION 6: الهيكل الإداري ===================== -->
+            <section id="sec-6" class="mb-16 scroll-mt-24 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-gradient-to-l from-yosr-blue to-yosr-dark p-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <span class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center text-lg ml-3">6</span>
+                        الهيكل الإداري والحوكمة
+                    </h2>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-xl font-bold text-yosr-blue mb-6">الفرق التشغيلية</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                        <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 text-center card-hover">
+                            <div class="w-14 h-14 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                                <i class="fa-solid fa-filter text-red-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-bold text-sm mb-1">فريق الفرز والتحقق</h4>
+                            <span class="text-xs text-gray-500">خط الدفاع الأول</span>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 text-center card-hover">
+                            <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                                <i class="fa-solid fa-user-doctor text-blue-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-bold text-sm mb-1">الفريق الطبي</h4>
+                            <span class="text-xs text-gray-500">أطباء متطوعون</span>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 text-center card-hover">
+                            <div class="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                                <i class="fa-solid fa-calculator text-green-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-bold text-sm mb-1">الفريق المالي</h4>
+                            <span class="text-xs text-gray-500">إدارة "بنكك"</span>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 text-center card-hover">
+                            <div class="w-14 h-14 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                                <i class="fa-solid fa-headset text-purple-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-bold text-sm mb-1">فريق التواصل</h4>
+                            <span class="text-xs text-gray-500">إدارة المنصات</span>
+                        </div>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-yosr-blue mb-4">جدول المسؤوليات</h3>
+                    <div class="overflow-x-auto mb-8">
+                        <table class="text-sm">
+                            <thead>
+                                <tr>
+                                    <th class="w-1/4">الدور</th>
+                                    <th>المسؤوليات الأساسية</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-semibold text-yosr-blue">مدير العمليات</td>
+                                    <td>الإشراف العام، حل النزاعات، الموافقة على المصروفات الاستثنائية، إدارة الأزمات.</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold text-yosr-blue">ضابط التحقق</td>
+                                    <td>مراجعة المستندات، الاتصال بالجهات، تقييم الحالة، كتابة التوصية.</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold text-yosr-blue">المسؤول المالي</td>
+                                    <td>متابعة "بنكك"، تحديث المدفوعات، التحويل للجهات، رفع الإيصالات.</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold text-yosr-blue">مسؤول المحتوى</td>
+                                    <td>صياغة القصص، التصميم الجرافيكي، النشر، الرد على التعليقات.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- سياسة حماية المبلغين -->
+                    <h3 class="text-xl font-bold text-yosr-blue mb-4"><i class="fa-solid fa-shield-halved ml-2 text-yosr-gold"></i> سياسة حماية المُبلِّغين (Whistleblowing)</h3>
+                    <div class="bg-gradient-to-br from-purple-50 to-indigo-50 p-6 rounded-xl border-2 border-purple-200">
+                        <div class="mb-6">
+                            <h4 class="font-bold text-purple-800 mb-2">لماذا هذه السياسة؟</h4>
+                            <p class="text-gray-700">ماذا لو كان الفساد من المدير العام أو أحد المؤسسين؟ كيف يُبلِّغ الموظف الصغير دون أن يُفصل؟</p>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-white p-5 rounded-xl border border-purple-100">
+                                <h5 class="font-bold text-purple-700 mb-3"><i class="fa-solid fa-envelope-circle-check ml-2"></i> قناة التبليغ الآمنة</h5>
+                                <div class="bg-purple-100 p-3 rounded-lg text-center mb-3">
+                                    <code class="text-purple-800 font-bold">integrity@yusr.sd</code>
+                                </div>
+                                <p class="text-sm text-gray-600">إيميل مشفر يصل فقط لرئيس مجلس الأمناء أو جهة قانونية خارجية مستقلة.</p>
+                            </div>
+                            <div class="bg-white p-5 rounded-xl border border-purple-100">
+                                <h5 class="font-bold text-purple-700 mb-3"><i class="fa-solid fa-user-shield ml-2"></i> الحصانة المطلقة</h5>
+                                <div class="bg-green-50 p-3 rounded-lg border border-green-200">
+                                    <p class="text-sm text-green-800 font-medium">"لا يجوز فصل أو معاقبة أي عضو يُبلِّغ عن شبهة فساد بحسن نية، حتى لو ثبت لاحقاً عدم صحتها."</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 bg-white p-4 rounded-xl border border-purple-100">
+                            <h5 class="font-bold text-purple-700 mb-3">آلية التعامل مع البلاغات:</h5>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">1. استلام البلاغ</span>
+                                <span class="text-purple-400">→</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">2. تشكيل لجنة تحقيق مستقلة</span>
+                                <span class="text-purple-400">→</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">3. التحقيق السري</span>
+                                <span class="text-purple-400">→</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">4. إصدار القرار</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== SECTION 7: المجلس الإداري ===================== -->
+            <section id="sec-7" class="mb-16 scroll-mt-24 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-gradient-to-l from-yosr-blue to-yosr-dark p-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <span class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center text-lg ml-3">7</span>
+                        المجلس الإداري (مجلس الأمناء)
+                    </h2>
+                </div>
+                <div class="p-8">
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-blue-50 p-6 rounded-xl border border-blue-100">
+                            <h4 class="font-bold text-yosr-blue mb-4"><i class="fa-solid fa-user-plus ml-2"></i> كيفية التعيين</h4>
+                            <ul class="space-y-2 text-gray-700">
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-600 mt-1"></i><span>بالتزكية والإجماع من الأعضاء المؤسسين</span></li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-600 mt-1"></i><span>مدة العضوية: سنتان قابلة للتجديد</span></li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-600 mt-1"></i><span>التصويت: بأغلبية الثلثين</span></li>
+                            </ul>
+                        </div>
+                        <div class="bg-amber-50 p-6 rounded-xl border border-amber-100">
+                            <h4 class="font-bold text-yosr-gold mb-4"><i class="fa-solid fa-list-check ml-2"></i> شروط العضوية</h4>
+                            <ul class="space-y-2 text-gray-700">
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-star text-yosr-gold mt-1"></i><span>حسن السيرة والسمعة</span></li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-star text-yosr-gold mt-1"></i><span>الخبرة الإدارية أو الشرعية</span></li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-star text-yosr-gold mt-1"></i><span>عدم الانتماء السياسي النشط</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-red-50 p-6 rounded-xl border border-red-100">
+                        <h4 class="font-bold text-red-800 mb-4"><i class="fa-solid fa-user-xmark ml-2"></i> أسباب شطب العضوية</h4>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-xmark text-red-600 mt-1"></i><span>الاستقالة الطوعية</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-xmark text-red-600 mt-1"></i><span>العجز الدائم عن أداء المهام</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-xmark text-red-600 mt-1"></i><span>خيانة الأمانة (بقرار ثلثي الأعضاء)</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-xmark text-red-600 mt-1"></i><span>الغياب المتكرر (3 اجتماعات متتالية)</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== SECTION 8: نطاق العمل ===================== -->
+            <section id="sec-8" class="mb-16 scroll-mt-24 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-gradient-to-l from-yosr-blue to-yosr-dark p-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <span class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center text-lg ml-3">8</span>
+                        نطاق العمل وأنواع الحالات
+                    </h2>
+                </div>
+                <div class="p-8">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-bold text-green-700 mb-4"><i class="fa-solid fa-circle-check ml-2"></i> الحالات المدعومة</h3>
+                            <div class="space-y-4">
+                                <div class="bg-green-50 p-4 rounded-xl border-r-4 border-green-500">
+                                    <h4 class="font-bold text-green-800 mb-2"><i class="fa-solid fa-stethoscope ml-1"></i> الحالات الطبية</h4>
+                                    <p class="text-sm text-gray-700">العمليات الجراحية، الأدوية المنقذة، الأجهزة التعويضية، غسيل الكلى</p>
+                                </div>
+                                <div class="bg-blue-50 p-4 rounded-xl border-r-4 border-blue-500">
+                                    <h4 class="font-bold text-blue-800 mb-2"><i class="fa-solid fa-graduation-cap ml-1"></i> الحالات التعليمية</h4>
+                                    <p class="text-sm text-gray-700">الرسوم الدراسية، رسوم استخراج الشهادات</p>
+                                </div>
+                                <div class="bg-orange-50 p-4 rounded-xl border-r-4 border-orange-500">
+                                    <h4 class="font-bold text-orange-800 mb-2"><i class="fa-solid fa-house ml-1"></i> الإيواء والنزوح</h4>
+                                    <p class="text-sm text-gray-700">الإيجارات، ترميم المنازل، توفير الخيام</p>
+                                </div>
+                                <div class="bg-cyan-50 p-4 rounded-xl border-r-4 border-cyan-500">
+                                    <h4 class="font-bold text-cyan-800 mb-2"><i class="fa-solid fa-droplet ml-1"></i> سقيا الماء</h4>
+                                    <p class="text-sm text-gray-700">حفر الآبار، محطات المياه، صيانة المضخات</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold text-red-700 mb-4"><i class="fa-solid fa-circle-xmark ml-2"></i> الحالات المستثناة</h3>
+                            <div class="bg-red-50 p-6 rounded-xl border border-red-100">
+                                <ul class="space-y-3 text-gray-700">
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-ban text-red-600 mt-1"></i><span>سداد الديون الشخصية</span></li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-ban text-red-600 mt-1"></i><span>تكاليف الزواج والمناسبات</span></li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-ban text-red-600 mt-1"></i><span>الديات</span></li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-ban text-red-600 mt-1"></i><span>تمويل المشاريع التجارية</span></li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-ban text-red-600 mt-1"></i><span>العلاج التجميلي</span></li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-ban text-red-600 mt-1"></i><span>العلاج بالخارج (إلا بقرار لجنة)</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== SECTION 9: دورة حياة الحالة ===================== -->
+            <section id="sec-9" class="mb-16 scroll-mt-24 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-gradient-to-l from-yosr-blue to-yosr-dark p-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <span class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center text-lg ml-3">9</span>
+                        دورة حياة الحالة (SOPs)
+                    </h2>
+                </div>
+                <div class="p-8">
+                    <div class="overflow-x-auto mb-8">
+                        <table class="text-sm">
+                            <thead>
+                                <tr>
+                                    <th>المرحلة</th>
+                                    <th>الهدف</th>
+                                    <th>المسؤول</th>
+                                    <th>قائمة التحقق</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-bold text-yosr-blue">1. الاستلام</td>
+                                    <td>فلترة الطلبات الناقصة</td>
+                                    <td>ضابط التحقق</td>
+                                    <td>
+                                        <div class="checklist-item"><input type="checkbox"> الصور واضحة</div>
+                                        <div class="checklist-item"><input type="checkbox"> رقم الهاتف صحيح</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-bold text-yosr-blue">2. التحقق</td>
+                                    <td>منع الاحتيال</td>
+                                    <td>ضابط التحقق</td>
+                                    <td>
+                                        <div class="checklist-item"><input type="checkbox"> تم الاتصال بالجهة</div>
+                                        <div class="checklist-item"><input type="checkbox"> الأسعار منطقية</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-bold text-yosr-blue">3. إعداد الملف</td>
+                                    <td>تجهيز للنشر</td>
+                                    <td>المالية + المحتوى</td>
+                                    <td>
+                                        <div class="checklist-item"><input type="checkbox"> تم طمس الوجوه</div>
+                                        <div class="checklist-item"><input type="checkbox"> العنوان واضح</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-bold text-yosr-gold">4. الإغلاق</td>
+                                    <td>ضمان وصول المال</td>
+                                    <td>المالية</td>
+                                    <td>
+                                        <div class="checklist-item"><input type="checkbox"> المبلغ مكتمل</div>
+                                        <div class="checklist-item"><input type="checkbox"> إيصال مرفوع</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="bg-yellow-50 p-5 rounded-xl border border-yellow-200">
+                        <h4 class="font-bold text-yellow-800 mb-2"><i class="fa-solid fa-triangle-exclamation ml-2"></i> القاعدة الذهبية</h4>
+                        <p class="text-gray-700 font-semibold">"لا مستند = لا حالة"</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== SECTION 10: سياسات القبول والرفض ===================== -->
+            <section id="sec-10" class="mb-16 scroll-mt-24 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-gradient-to-l from-yosr-blue to-yosr-dark p-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <span class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center text-lg ml-3">10</span>
+                        سياسات القبول والرفض
+                    </h2>
+                </div>
+                <div class="p-8">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-green-50 p-6 rounded-xl border border-green-100">
+                            <h3 class="text-xl font-bold text-green-800 mb-4"><i class="fa-solid fa-thumbs-up ml-2"></i> معايير القبول</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-green-600 mt-1"></i><span>وجود خطر حقيقي أو حاجة ملحة</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-green-600 mt-1"></i><span>مستندات رسمية حديثة (أقل من 30 يوم)</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-green-600 mt-1"></i><span>تكلفة تتطابق مع أسعار السوق</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-green-600 mt-1"></i><span>إمكانية التحقق من الجهة</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-red-50 p-6 rounded-xl border border-red-100">
+                            <h3 class="text-xl font-bold text-red-800 mb-4"><i class="fa-solid fa-thumbs-down ml-2"></i> أسباب الرفض</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start gap-3"><span class="bg-red-600 text-white text-xs px-2 py-0.5 rounded mt-1">1</span><span><strong>التزوير:</strong> حظر نهائي</span></li>
+                                <li class="flex items-start gap-3"><span class="bg-red-600 text-white text-xs px-2 py-0.5 rounded mt-1">2</span><span><strong>عدم الاختصاص:</strong> خارج النطاق</span></li>
+                                <li class="flex items-start gap-3"><span class="bg-red-600 text-white text-xs px-2 py-0.5 rounded mt-1">3</span><span><strong>الضبابية:</strong> لا يمكن التحقق</span></li>
+                                <li class="flex items-start gap-3"><span class="bg-red-600 text-white text-xs px-2 py-0.5 rounded mt-1">4</span><span><strong>الاكتفاء:</strong> جهات أخرى تكفلت</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== SECTION 11: التحقق وكشف التلاعب ===================== -->
+            <section id="sec-11" class="mb-16 scroll-mt-24 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-gradient-to-l from-yosr-blue to-yosr-dark p-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <span class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center text-lg ml-3">11</span>
+                        التحقق وكشف التلاعب
+                    </h2>
+                </div>
+                <div class="p-8">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-bold text-red-700 mb-4"><i class="fa-solid fa-flag ml-2"></i> علامات الخطر</h3>
+                            <div class="space-y-4">
+                                <div class="bg-red-50 p-4 rounded-lg border-r-4 border-red-400">
+                                    <strong class="text-red-800">جودة المستند</strong>
+                                    <p class="text-sm text-gray-700 mt-1">PDF رقمي نقي جداً قد يكون معدلاً</p>
+                                </div>
+                                <div class="bg-red-50 p-4 rounded-lg border-r-4 border-red-400">
+                                    <strong class="text-red-800">التناقض</strong>
+                                    <p class="text-sm text-gray-700 mt-1">"عملية عاجلة" وتاريخ قديم</p>
+                                </div>
+                                <div class="bg-red-50 p-4 rounded-lg border-r-4 border-red-400">
+                                    <strong class="text-red-800">الضغط المريب</strong>
+                                    <p class="text-sm text-gray-700 mt-1">إلحاح مع رفض تقديم معلومات</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold text-green-700 mb-4"><i class="fa-solid fa-list-ol ml-2"></i> آلية التصرف</h3>
+                            <div class="bg-green-50 p-6 rounded-xl border border-green-100">
+                                <ol class="space-y-4">
+                                    <li class="flex items-start gap-3">
+                                        <span class="bg-green-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm">1</span>
+                                        <span><strong>التجميد:</strong> وضع الحالة "On Hold"</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="bg-green-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm">2</span>
+                                        <span><strong>طلب المزيد:</strong> فيديو بتاريخ اليوم</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="bg-green-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm">3</span>
+                                        <span><strong>التحقق:</strong> بحث Google Lens</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="bg-green-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm">4</span>
+                                        <span><strong>القرار:</strong> حظر عند ثبوت التلاعب</span>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== SECTION 12: استراتيجية الخروج ===================== -->
+            <section id="sec-12" class="mb-16 scroll-mt-24 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-gradient-to-l from-yosr-blue to-yosr-dark p-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <span class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center text-lg ml-3">12</span>
+                        استراتيجية الخروج للمستفيدين (Exit Strategy)
+                    </h2>
+                </div>
+                <div class="p-8">
+                    <div class="bg-amber-50 p-6 rounded-xl border border-amber-200 mb-8">
+                        <h3 class="text-xl font-bold text-amber-800 mb-4"><i class="fa-solid fa-person-walking-arrow-right ml-2"></i> المبدأ: لا للتسول الدائم</h3>
+                        <p class="text-gray-700">هدف المنصة تمكين المحتاج من تجاوز أزمته، لا تحويله لمتلقٍ دائم للمساعدات.</p>
+                    </div>
+
+                    <h4 class="font-bold text-yosr-blue text-lg mb-4">سقوف الدعم حسب الفئة:</h4>
+                    <div class="overflow-x-auto mb-8">
+                        <table class="text-sm">
+                            <thead>
+                                <tr>
+                                    <th>نوع الدعم</th>
+                                    <th>الحد الأقصى</th>
+                                    <th>ماذا بعد؟</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-semibold">دعم الإيجار</td>
+                                    <td><span class="bg-red-100 text-red-700 px-2 py-1 rounded">6 أشهر</span></td>
+                                    <td>تحويل لشريك "تمكين اقتصادي" أو مشاريع صغيرة</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">الأدوية المزمنة</td>
+                                    <td><span class="bg-amber-100 text-amber-700 px-2 py-1 rounded">3 دورات</span></td>
+                                    <td>ربط بجمعيات مرضى متخصصة (كلى، سكر، إلخ)</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">الرسوم الدراسية</td>
+                                    <td><span class="bg-blue-100 text-blue-700 px-2 py-1 rounded">فصل واحد</span></td>
+                                    <td>توجيه لبرامج المنح والقروض الطلابية</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">الحالات الطبية الحادة</td>
+                                    <td><span class="bg-green-100 text-green-700 px-2 py-1 rounded">حتى الشفاء</span></td>
+                                    <td>لا سقف (العملية، العلاج الكيماوي، إلخ)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="bg-green-50 p-6 rounded-xl border border-green-200">
+                        <h4 class="font-bold text-green-800 mb-3"><i class="fa-solid fa-handshake ml-2"></i> شركاء التمكين</h4>
+                        <p class="text-gray-700 mb-3">عند بلوغ السقف، يتم تحويل الحالة لأحد الشركاء المتخصصين:</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-white px-3 py-1 rounded-full text-sm border border-green-200">مؤسسات التمويل الأصغر</span>
+                            <span class="bg-white px-3 py-1 rounded-full text-sm border border-green-200">جمعيات الحرفيين</span>
+                            <span class="bg-white px-3 py-1 rounded-full text-sm border border-green-200">برامج التدريب المهني</span>
+                            <span class="bg-white px-3 py-1 rounded-full text-sm border border-green-200">صندوق الطالب</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== SECTION 13: النظام المالي ===================== -->
+            <section id="sec-13" class="mb-16 scroll-mt-24 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-gradient-to-l from-yosr-blue to-yosr-dark p-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <span class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center text-lg ml-3">13</span>
+                        النظام المالي والرقابة
+                    </h2>
+                </div>
+                <div class="p-8">
+                    <div class="bg-yosr-blue/5 p-6 rounded-xl border-r-4 border-yosr-blue mb-8">
+                        <h3 class="text-xl font-bold text-yosr-blue mb-3"><i class="fa-solid fa-money-bill-wave ml-2"></i> سياسة "صفر كاش"</h3>
+                        <p class="text-gray-700">يمنع تسليم مبالغ نقدية للمستفيدين نهائياً. يتم الدفع عبر التحويل البنكي للمؤسسات فقط.</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+                            <h4 class="font-bold text-yosr-gold mb-3"><i class="fa-solid fa-check-double ml-2"></i> المطابقة المزدوجة</h4>
+                            <p class="text-sm text-gray-700">لا يتم اعتماد أي تبرع إلا بعد مطابقة "الرقم المرجعي" مع "كشف الحساب".</p>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+                            <h4 class="font-bold text-yosr-gold mb-3"><i class="fa-solid fa-user-check ml-2"></i> Maker-Checker</h4>
+                            <p class="text-sm text-gray-700">العمليات الكبيرة تتطلب موافقة شخصين (المدخل والمدقق).</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== SECTION 14: التسعير ===================== -->
+            <section id="sec-14" class="mb-16 scroll-mt-24 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-gradient-to-l from-yosr-blue to-yosr-dark p-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <span class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center text-lg ml-3">14</span>
+                        سياسة التسعير والتكاليف
+                    </h2>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-xl font-bold text-yosr-blue mb-4">معادلة التسعير المعتمدة</h3>
+                    <div class="bg-gray-900 text-green-400 p-6 rounded-xl font-mono text-center mb-6" dir="ltr">
+                        <code class="text-lg">Target = Base Cost + (15% Buffer) + Transfer Fees</code>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-blue-50 p-4 rounded-xl border border-blue-100 text-center">
+                            <h4 class="font-bold text-blue-800 mb-2">Base Cost</h4>
+                            <p class="text-sm text-gray-700">المبلغ في الفاتورة</p>
+                        </div>
+                        <div class="bg-amber-50 p-4 rounded-xl border border-amber-100 text-center">
+                            <h4 class="font-bold text-amber-800 mb-2">Buffer 15%</h4>
+                            <p class="text-sm text-gray-700">هامش تغير الأسعار</p>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-xl border border-green-100 text-center">
+                            <h4 class="font-bold text-green-800 mb-2">Transfer Fees</h4>
+                            <p class="text-sm text-gray-700">رسوم التحويل</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== SECTION 15: سيناريوهات الدفع والاسترداد ===================== -->
+            <section id="sec-15" class="mb-16 scroll-mt-24 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-gradient-to-l from-yosr-blue to-yosr-dark p-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <span class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center text-lg ml-3">15</span>
+                        سيناريوهات الدفع وسياسة الاسترداد
+                    </h2>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-xl font-bold text-yosr-blue mb-6">السيناريوهات التشغيلية</h3>
+                    <div class="grid md:grid-cols-2 gap-4 mb-8">
+                        <div class="bg-red-50 p-5 rounded-xl border border-red-100">
+                            <h4 class="font-bold text-red-800 mb-3">الجهة تطلب كاش</h4>
+                            <p class="text-sm text-gray-700">التحويل لوسيط معتمد للسحب والدفع وتصوير الإيصال.</p>
+                        </div>
+                        <div class="bg-amber-50 p-5 rounded-xl border border-amber-100">
+                            <h4 class="font-bold text-amber-800 mb-3">اكتمال جزئي</h4>
+                            <p class="text-sm text-gray-700">إذا > 70% يُغطى من صندوق الطوارئ.</p>
+                        </div>
+                        <div class="bg-gray-100 p-5 rounded-xl border border-gray-200">
+                            <h4 class="font-bold text-gray-800 mb-3">وفاة المريض</h4>
+                            <p class="text-sm text-gray-700">تخيير المتبرعين: استرجاع أو صدقة جارية.</p>
+                        </div>
+                        <div class="bg-blue-50 p-5 rounded-xl border border-blue-100">
+                            <h4 class="font-bold text-blue-800 mb-3">طلب استرجاع</h4>
+                            <p class="text-sm text-gray-700">يجوز قبل الصرف فقط (يُخصم رسوم التحويل).</p>
+                        </div>
+                    </div>
+
+                    <!-- سياسة الاسترداد التفصيلية -->
+                    <h3 class="text-xl font-bold text-yosr-blue mb-4"><i class="fa-solid fa-rotate-left ml-2 text-yosr-gold"></i> سياسة الاسترداد (Refund Policy)</h3>
+                    <div class="critical-box p-6 rounded-xl mb-6">
+                        <h4 class="font-bold text-red-800 mb-3"><i class="fa-solid fa-triangle-exclamation ml-2"></i> تحذير شرعي وقانوني</h4>
+                        <p class="text-gray-700">هذا الباب فخ قانوني وشرعي خطير. يجب التعامل معه بحذر شديد.</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-green-50 p-5 rounded-xl border border-green-200">
+                            <h4 class="font-bold text-green-800 mb-3"><i class="fa-solid fa-check ml-2"></i> متى يحق الاسترداد؟</h4>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-circle-check text-green-600 mt-1"></i><span>خطأ في التحويل (أضاف صفراً زائداً)</span></li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-circle-check text-green-600 mt-1"></i><span>إلغاء الحالة قبل الصرف + رفض التحويل لغيرها</span></li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-circle-check text-green-600 mt-1"></i><span>اكتشاف احتيال قبل الصرف</span></li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 p-5 rounded-xl border border-red-200">
+                            <h4 class="font-bold text-red-800 mb-3"><i class="fa-solid fa-xmark ml-2"></i> متى لا يحق الاسترداد؟</h4>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-circle-xmark text-red-600 mt-1"></i><span>بعد صرف المبلغ للجهة</span></li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-circle-xmark text-red-600 mt-1"></i><span>بعد موافقة المتبرع على التحويل لحالة أخرى</span></li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-circle-xmark text-red-600 mt-1"></i><span>تبرعات الزكاة (لا ترد شرعاً)</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- بند الموافقة -->
+                    <div class="legal-box p-6 rounded-xl">
+                        <h4 class="font-bold text-green-800 mb-3"><i class="fa-solid fa-file-signature ml-2"></i> البند الإلزامي في الشروط والأحكام</h4>
+                        <div class="bg-white p-4 rounded-lg border border-green-200">
+                            <p class="text-gray-800 italic font-medium">
+                                "أوافق على أنه في حال تعذر إيصال تبرعي للمستفيد المحدد لسبب قاهر (وفاة، إلغاء، تكرار)، يحق للمنصة توجيهه لأقرب حالة مشابهة في نفس الفئة، وأُبرئ ذمة المنصة من أي مطالبة لاحقة."
+                            </p>
+                        </div>
+                        <p class="text-sm text-green-700 mt-3"><i class="fa-solid fa-shield ml-1"></i> هذا البند يحميكم من الديون الشرعية والمطالبات القانونية.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== SECTION 16: الوقف والاستدامة ===================== -->
+            <section id="sec-16" class="mb-16 scroll-mt-24 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-gradient-to-l from-yosr-blue to-yosr-dark p-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <span class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center text-lg ml-3">16</span>
+                        الوقف والاستدامة المالية (Endowment)
+                    </h2>
+                </div>
+                <div class="p-8">
+                    <div class="bg-amber-50 p-6 rounded-xl border border-amber-200 mb-8">
+                        <h3 class="text-xl font-bold text-amber-800 mb-3"><i class="fa-solid fa-question-circle ml-2"></i> السؤال الجوهري</h3>
+                        <p class="text-gray-700 text-lg">كيف تعيش المنصة نفسها؟ (رواتب موظفين تقنيين، سيرفرات، إيجار، كهرباء)</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-blue-50 p-6 rounded-xl border border-blue-200">
+                            <h4 class="font-bold text-yosr-blue mb-4"><i class="fa-solid fa-percent ml-2"></i> نسبة التشغيل (Admin Fee)</h4>
+                            <div class="bg-white p-4 rounded-lg mb-4">
+                                <div class="text-center">
+                                    <span class="text-4xl font-bold text-yosr-blue">0%</span>
+                                    <p class="text-gray-600 text-sm mt-1">من التبرعات المباشرة للحالات</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-700">لا نأخذ أي نسبة من أموال المتبرعين المخصصة للحالات.</p>
+                        </div>
+
+                        <div class="bg-green-50 p-6 rounded-xl border border-green-200">
+                            <h4 class="font-bold text-green-800 mb-4"><i class="fa-solid fa-seedling ml-2"></i> الحل: سهم التشغيل</h4>
+                            <div class="bg-white p-4 rounded-lg mb-4">
+                                <p class="text-gray-700 font-medium text-center">"الوقف التشغيلي"</p>
+                            </div>
+                            <p class="text-sm text-gray-700">حملة دائمة مخصصة للصرف على المنصة، يفهم المتبرع أن ماله هنا يذهب للكهرباء والموظفين.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                        <h4 class="font-bold text-yosr-blue mb-4">مصادر تمويل التشغيل</h4>
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div class="bg-white p-4 rounded-lg text-center border border-gray-100">
+                                <i class="fa-solid fa-hand-holding-heart text-3xl text-yosr-gold mb-2"></i>
+                                <h5 class="font-bold text-sm">سهم التشغيل</h5>
+                                <p class="text-xs text-gray-600">تبرعات مخصصة للإدارة</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg text-center border border-gray-100">
+                                <i class="fa-solid fa-building text-3xl text-yosr-blue mb-2"></i>
+                                <h5 class="font-bold text-sm">رعاية الشركات</h5>
+                                <p class="text-xs text-gray-600">CSR من القطاع الخاص</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg text-center border border-gray-100">
+                                <i class="fa-solid fa-globe text-3xl text-green-600 mb-2"></i>
+                                <h5 class="font-bold text-sm">المنظمات الدولية</h5>
+                                <p class="text-xs text-gray-600">منح بناء القدرات</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== SECTION 17: الاعتمادات ===================== -->
+            <section id="sec-17" class="mb-16 scroll-mt-24 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-gradient-to-l from-yosr-blue to-yosr-dark p-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <span class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center text-lg ml-3">17</span>
+                        الاعتمادات لدى المستشفيات
+                    </h2>
+                </div>
+                <div class="p-8">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-blue-50 p-6 rounded-xl border border-blue-100">
+                            <h4 class="font-bold text-yosr-blue mb-4"><i class="fa-solid fa-clipboard-list ml-2"></i> متطلبات الاعتماد</h4>
+                            <ul class="space-y-2 text-gray-700">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-600"></i><span>سجل تجاري ساري</span></li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-600"></i><span>ترخيص عمل</span></li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-600"></i><span>حساب بنكي رسمي</span></li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-600"></i><span>شفافية الفواتير</span></li>
+                            </ul>
+                        </div>
+                        <div class="bg-green-50 p-6 rounded-xl border border-green-100">
+                            <h4 class="font-bold text-green-800 mb-4"><i class="fa-solid fa-gift ml-2"></i> فوائد الاعتماد</h4>
+                            <ul class="space-y-2 text-gray-700">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-star text-yosr-gold"></i><span>سرعة السداد</span></li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-star text-yosr-gold"></i><span>المصداقية والثقة</span></li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-star text-yosr-gold"></i><span>ظهور كجهة موصى بها</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== SECTION 18: المؤسسات والشركاء ===================== -->
+            <section id="sec-18" class="mb-16 scroll-mt-24 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-gradient-to-l from-yosr-blue to-yosr-dark p-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <span class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center text-lg ml-3">18</span>
+                        المؤسسات المتعاونة والشركاء
+                    </h2>
+                </div>
+                <div class="p-8">
+                    <div class="bg-yosr-gold/10 p-6 rounded-xl border border-yosr-gold/30 mb-6">
+                        <h4 class="font-bold text-yosr-gold mb-2">التعريف</h4>
+                        <p class="text-gray-700">مؤسسات تقدم تخفيض حصري (10-20% على الأقل) للحالات التي تأتي عن طريق منصة يُسر.</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-white p-5 rounded-xl border border-gray-200">
+                            <h4 class="font-bold text-yosr-blue mb-3">شروط التعاون</h4>
+                            <p class="text-sm text-gray-700">تقديم خصم حقيقي، توقيع اتفاقية، حسن معاملة الحالات.</p>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl border border-gray-200">
+                            <h4 class="font-bold text-yosr-blue mb-3">ما تستفيده المؤسسة</h4>
+                            <p class="text-sm text-gray-700">ظهور الشعار، تقارير تأثير مشترك، سمعة إيجابية.</p>
+                        </div>
+                    </div>
+                    <div class="bg-red-50 p-6 rounded-xl border border-red-100">
+                        <h4 class="font-bold text-red-800 mb-4">متى تُلغى الشراكة</h4>
+                        <p class="text-gray-700">التلاعب في الأسعار، سوء معاملة الحالات، مخالفة السياسات، الإضرار بالسمعة.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== SECTION 19: المتطوعون ===================== -->
+            <section id="sec-19" class="mb-16 scroll-mt-24 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-gradient-to-l from-yosr-blue to-yosr-dark p-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <span class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center text-lg ml-3">19</span>
+                        المتطوعون
+                    </h2>
+                </div>
+                <div class="p-8">
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-blue-50 p-6 rounded-xl border border-blue-100">
+                            <h4 class="font-bold text-yosr-blue mb-4">كيفية الانضمام</h4>
+                            <ol class="space-y-2 text-gray-700 text-sm">
+                                <li>1. تقديم طلب الانضمام</li>
+                                <li>2. اجتياز المقابلة الشخصية</li>
+                                <li>3. فترة تجربة (أسبوعين)</li>
+                                <li>4. اجتياز دورة التعريف</li>
+                                <li>5. توقيع التعهد والقسم</li>
+                            </ol>
+                        </div>
+                        <div class="bg-red-50 p-6 rounded-xl border border-red-100">
+                            <h4 class="font-bold text-red-800 mb-4">أسباب شطب العضوية</h4>
+                            <ul class="space-y-2 text-gray-700 text-sm">
+                                <li>• استغلال المنصب لجمع تبرعات خاصة</li>
+                                <li>• التواصل غير المهني مع المستفيدين</li>
+                                <li>• تسريب بيانات المستفيدين</li>
+                                <li>• الغياب المتكرر دون عذر</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-yosr-gold/10 to-amber-100/50 p-8 rounded-2xl border-2 border-yosr-gold/30 text-center">
+                        <h4 class="font-bold text-yosr-gold text-xl mb-6"><i class="fa-solid fa-hand-holding-heart ml-2"></i> القسم الشرعي للمتطوع</h4>
+                        <blockquote class="text-lg text-gray-800 font-medium leading-relaxed italic">
+                            "أقسم بالله العظيم، أن أؤدي مهامي في منصة يُسر بأمانة وإخلاص، وأن أحافظ على أسرار المستفيدين وخصوصياتهم، وأن لا أستغل موقعي لمنفعة شخصية، وأن أتحرى الصدق في كل معلومة أرفعها أو أدققها، وأن أراقب الله في مال المتبرعين وحاجة المحتاجين. والله على ما أقول شهيد."
+                        </blockquote>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== SECTION 21: إدارة المخاطر ===================== -->
+            <section id="sec-21" class="mb-16 scroll-mt-24 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-gradient-to-l from-yosr-blue to-yosr-dark p-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <span class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center text-lg ml-3">21</span>
+                        إدارة المخاطر والأزمات
+                    </h2>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-xl font-bold text-yosr-blue mb-4">سجل المخاطر</h3>
+                    <div class="overflow-x-auto mb-8">
+                        <table class="text-sm">
+                            <thead>
+                                <tr>
+                                    <th>الخطر</th>
+                                    <th>الوقاية</th>
+                                    <th>التصحيح</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-red-700 font-medium">مستند مزور</td>
+                                    <td>أدوات فحص PDF</td>
+                                    <td>استرداد المال، حظر المستفيد</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-red-700 font-medium">توقف النظام</td>
+                                    <td>نسخ احتياطي يومي</td>
+                                    <td>العمل اليدوي عبر الواتساب</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-red-700 font-medium">حملة تشويه</td>
+                                    <td>الشفافية والتقارير</td>
+                                    <td>نشر كشوفات الحسابات</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="bg-red-50 p-6 rounded-xl border border-red-200 mb-8">
+                        <h4 class="font-bold text-red-800 text-lg mb-4"><i class="fa-solid fa-bolt ml-2"></i> بروتوكول الطوارئ (Fast Track)</h4>
+                        <p class="text-gray-700">زمن المراجعة: 30 دقيقة | النشر: فوري مع وسم "عاجل" | سقف: 3 حالات حرجة كحد أقصى</p>
+                    </div>
+
+                    <!-- بروتوكول انقطاع الإنترنت -->
+                    <h3 class="text-xl font-bold text-yosr-blue mb-4"><i class="fa-solid fa-wifi-slash ml-2 text-yosr-gold"></i> بروتوكول "انقطاع السودان" (The Blackout Protocol)</h3>
+                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-xl text-white mb-8">
+                        <div class="mb-4">
+                            <h4 class="font-bold text-amber-400 mb-2">السيناريو:</h4>
+                            <p class="text-gray-300">انقطاع الإنترنت والاتصالات عن كامل السودان لمدة أسبوعين أو أكثر (حدث سابقاً).</p>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-white/10 p-5 rounded-xl">
+                                <h5 class="font-bold text-amber-400 mb-3"><i class="fa-solid fa-satellite-dish ml-2"></i> شبكة الـ Offline</h5>
+                                <ul class="space-y-2 text-gray-300 text-sm">
+                                    <li>• نقطة ارتكاز خارج السودان (مصر/الإمارات)</li>
+                                    <li>• إدارة الواجهة من سيرفر خارجي</li>
+                                    <li>• الداخل يعمل عبر Starlink (إذا توفر)</li>
+                                    <li>• التواصل عبر SMS للطوارئ القصوى</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white/10 p-5 rounded-xl">
+                                <h5 class="font-bold text-amber-400 mb-3"><i class="fa-solid fa-money-bill-transfer ml-2"></i> صندوق الطوارئ اللامركزي</h5>
+                                <ul class="space-y-2 text-gray-300 text-sm">
+                                    <li>• <strong>Sinking Fund:</strong> مبلغ كاش مخزن مسبقاً</li>
+                                    <li>• يُفوض "مدير الولاية" بالصرف دون الرجوع للمركز</li>
+                                    <li>• سقف الصرف: <span class="text-amber-400 font-bold">[يُحدد]</span> للحالة الواحدة</li>
+                                    <li>• التوثيق الورقي إلزامي (إيصالات مختومة)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 bg-red-900/50 p-4 rounded-lg border border-red-500/50">
+                            <p class="text-sm text-red-200"><i class="fa-solid fa-triangle-exclamation ml-1"></i> <strong>تنبيه:</strong> عند عودة الاتصال، يُرفع كل التوثيق الورقي ويُدقق خلال 72 ساعة.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== SECTION 22: الأمن والبيانات ===================== -->
+            <section id="sec-22" class="mb-16 scroll-mt-24 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-gradient-to-l from-yosr-blue to-yosr-dark p-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <span class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center text-lg ml-3">22</span>
+                        السياسات التقنية وأمن المعلومات
+                    </h2>
+                </div>
+                <div class="p-8">
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-blue-50 p-6 rounded-xl border border-blue-100">
+                            <h4 class="font-bold text-yosr-blue mb-4"><i class="fa-solid fa-database ml-2"></i> حوكمة البيانات</h4>
+                            <ul class="space-y-2 text-gray-700 text-sm">
+                                <li>• تخزين مشفر</li>
+                                <li>• نسخ احتياطي يومي (محلي + سحابي)</li>
+                                <li>• صلاحيات وصول محددة</li>
+                                <li>• مدة الاحتفاظ: 5 سنوات</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 p-6 rounded-xl border border-red-100">
+                            <h4 class="font-bold text-red-800 mb-4"><i class="fa-solid fa-ban ml-2"></i> ما يُحظر (Zero Tolerance)</h4>
+                            <ul class="space-y-2 text-gray-700 text-sm">
+                                <li>• تعديل مبلغ بدون مرجع بنكي</li>
+                                <li>• حذف أي سجل مالي</li>
+                                <li>• سكرين شوت لبيانات المتبرعين</li>
+                                <li>• مشاركة حساب الدخول</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- الوصية الرقمية -->
+                    <h3 class="text-xl font-bold text-yosr-blue mb-4"><i class="fa-solid fa-key ml-2 text-yosr-gold"></i> سياسة "الوصية الرقمية" (Digital Death Protocol)</h3>
+                    <div class="bg-gradient-to-br from-purple-50 to-indigo-50 p-6 rounded-xl border-2 border-purple-200 mb-8">
+                        <div class="mb-4">
+                            <h4 class="font-bold text-purple-800 mb-2">المشكلة:</h4>
+                            <p class="text-gray-700">ماذا يحدث لحسابات السوشيال ميديا وقواعد البيانات إذا مات أو اختفى "الآدمن الوحيد"؟</p>
+                        </div>
+                        
+                        <div class="bg-white p-5 rounded-xl border border-purple-100">
+                            <h5 class="font-bold text-purple-700 mb-3"><i class="fa-solid fa-vault ml-2"></i> الحل: الظرف البنكي المغلق</h5>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check-circle text-green-600 mt-1"></i>
+                                    <span>يُودع ظرف مغلق في خزنة المنظمة يحتوي على:</span>
+                                </li>
+                                <li class="pr-8 space-y-1 text-sm">
+                                    <div class="bg-gray-50 p-2 rounded">• كلمات مرور جميع حسابات السوشيال ميديا</div>
+                                    <div class="bg-gray-50 p-2 rounded">• بيانات الدخول للسيرفرات وقواعد البيانات</div>
+                                    <div class="bg-gray-50 p-2 rounded">• مفاتيح التشفير (SSH Keys, API Keys)</div>
+                                    <div class="bg-gray-50 p-2 rounded">• بيانات الدخول لحسابات البنوك الإلكترونية</div>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-lock text-purple-600 mt-1"></i>
+                                    <span><strong>شرط الفتح:</strong> قرار مجلس الأمناء بأغلبية الثلثين + وفاة/عجز المسؤول التقني</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="mt-4 bg-yellow-50 p-3 rounded-lg border border-yellow-200">
+                            <p class="text-sm text-yellow-800"><i class="fa-solid fa-sync ml-1"></i> <strong>التحديث:</strong> يُراجع محتوى الظرف ويُحدث كل 6 أشهر.</p>
+                        </div>
+                    </div>
+
+                    <!-- بروتوكول X -->
+                    <div class="critical-box p-6 rounded-xl">
+                        <h4 class="font-bold text-red-800 mb-4"><i class="fa-solid fa-skull-crossbones ml-2"></i> بروتوكول X (الاختراق الأمني)</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3 bg-white p-3 rounded-lg">
+                                <span class="bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">1</span>
+                                <span>تفعيل وضع الصيانة (Maintenance Mode)</span>
+                            </div>
+                            <div class="flex items-center gap-3 bg-white p-3 rounded-lg">
+                                <span class="bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">2</span>
+                                <span>فصل قاعدة البيانات عن الإنترنت</span>
+                            </div>
+                            <div class="flex items-center gap-3 bg-white p-3 rounded-lg">
+                                <span class="bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">3</span>
+                                <span>إخطار البنك لتجميد الحسابات مؤقتاً</span>
+                            </div>
+                            <div class="flex items-center gap-3 bg-white p-3 rounded-lg">
+                                <span class="bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">4</span>
+                                <span>استعادة نسخة الأمس الاحتياطية</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== SECTION 23: الاتصال والإعلام ===================== -->
+            <section id="sec-23" class="mb-16 scroll-mt-24 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-gradient-to-l from-yosr-blue to-yosr-dark p-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <span class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center text-lg ml-3">23</span>
+                        الاتصال والإعلام
+                    </h2>
+                </div>
+                <div class="p-8">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-amber-50 p-6 rounded-xl border border-amber-100">
+                            <h4 class="font-bold text-yosr-gold mb-4"><i class="fa-solid fa-camera ml-2"></i> سياسة النشر</h4>
+                            <ul class="space-y-2 text-gray-700 text-sm">
+                                <li>• يمنع نشر وجوه الأطفال والنساء</li>
+                                <li>• يمنع صور الجروح والدماء</li>
+                                <li>• موافقة مستنيرة قبل النشر (توقيع أو صوتية)</li>
+                            </ul>
+                        </div>
+                        <div class="bg-blue-50 p-6 rounded-xl border border-blue-100">
+                            <h4 class="font-bold text-yosr-blue mb-4"><i class="fa-solid fa-headset ml-2"></i> الشكاوى</h4>
+                            <ul class="space-y-2 text-gray-700 text-sm">
+                                <li>• قناة مخصصة (واتساب/إيميل)</li>
+                                <li>• الرد خلال 24 ساعة عمل</li>
+                                <li>• لجنة مستقلة للشكاوى المالية</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== SECTION 24: الملحقات ===================== -->
+            <section id="sec-24" class="mb-16 scroll-mt-24 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden no-print">
+                <div class="bg-gradient-to-l from-yosr-blue to-yosr-dark p-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <span class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center text-lg ml-3">24</span>
+                        الملحقات والنماذج
+                    </h2>
+                </div>
+                <div class="p-8">
+                    <div class="bg-gray-50 p-6 rounded-xl border border-dashed border-gray-300">
+                        <h4 class="font-bold text-yosr-blue mb-4">الملفات المرفقة</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-file-pdf text-red-500 text-xl"></i>
+                                <span>ملحق (أ): جدول المستندات المطلوبة لكل فئة</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-file-word text-blue-500 text-xl"></i>
+                                <span>ملحق (ب): نموذج خطاب الاعتماد للمستشفيات</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-file-excel text-green-500 text-xl"></i>
+                                <span>ملحق (ج): قالب التقرير الشهري</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-file-signature text-purple-500 text-xl"></i>
+                                <span>ملحق (د): نموذج الشروط والأحكام للمتبرعين</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-file-contract text-amber-500 text-xl"></i>
+                                <span>ملحق (هـ): نموذج تعهد المتطوع والقسم</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-file-shield text-gray-700 text-xl"></i>
+                                <span>ملحق (و): نموذج الإفصاح عن تضارب المصالح</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <div class="text-center text-sm text-gray-500 py-8 border-t border-gray-200">
+                <p class="mb-2">تم إعداد هذا الدليل ليكون المرجع النهائي لاستدامة عمل المنصة لعقود قادمة</p>
+                <p class="font-semibold text-yosr-blue">&copy; 2025 منصة يُسر للتكافل الرقمي</p>
+                <p class="text-xs text-gray-400 mt-2">الإصدار 7.0 - الطبعة المؤسسية الشاملة</p>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('translate-x-full');
+        }
+
+        function closeSidebarOnMobile() {
+            if (window.innerWidth < 1024) {
+                const sidebar = document.getElementById('sidebar');
+                sidebar.classList.add('translate-x-full');
+            }
+        }
+
+        // Active Link Highlighting
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
